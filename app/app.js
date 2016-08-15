@@ -1,14 +1,27 @@
 'use strict';
 
-// Declare app level module which depends on views, and components
-angular.module('myApp', [
-  'ngRoute',
-  'myApp.view1',
-  'myApp.view2',
-  'myApp.version'
-]).
-config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-  $locationProvider.hashPrefix('!');
-
-  $routeProvider.otherwise({redirectTo: '/view1'});
-}]);
+var myApp = angular.module('myApp', ['ngRoute']) // you must inject the ngRoute (included as a separate js-file)
+    .config(['$routeProvider', '$locationProvider',
+      function($routeProvider, $locationProvider) {
+        $routeProvider.
+        when('/', {
+          templateUrl: 'views/index.html'
+        }).
+        when('/pubs', {
+          templateUrl: 'views/pub-list.html',
+          controller: 'PubListController',
+          controllerAs: 'pubs' // players could be seen as an instance of the controller, use it in the view!
+        }).
+        when('/pub/:id', {
+          templateUrl: 'views/pub-detail.html',
+          controller: 'PubDetailController',
+          controllerAs: 'pub'
+        }).
+        otherwise({
+          redirectTo: '/'
+        });
+        $locationProvider.html5Mode({
+          enabled: true,
+          requireBase: false
+        });
+      }]);

@@ -1,0 +1,9 @@
+<h3>List all pubs</h3>
+
+<ul>
+    <!-- Using pub when I have set the controllerAs in the app.js and routeProvider -->
+    <li data-ng-repeat="_pub in pubs.pubList">
+        {{ _pub.name }}  <a data-ng-href='pub/{{_pub.id}}'>More info</a>
+    </li>
+
+</ul>
