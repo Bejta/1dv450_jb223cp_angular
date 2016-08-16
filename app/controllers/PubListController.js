@@ -12,6 +12,8 @@ PubListController.$inject = ['PubService']; // inject the service to the Control
 function PubListController(PubService) {
     // Using controllerAs so $scope is in this (save a ref in variable)
     var vm = this;
+
     var thePubs = PubService.getAll();
-    vm.pubList = thePubs;
+    vm.pubsList = thePubs;
+    //vm.pubsList=PubService.getAll();
 }

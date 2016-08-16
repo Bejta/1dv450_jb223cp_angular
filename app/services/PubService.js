@@ -8,6 +8,7 @@ function PubService($q, $http) {
 
     return {
         getAll:function() {
+            /*console.log ($http.get('https://rubyonrails-api-jb223cp.c9users.io/api/v1/pubs?akey=newtoken'));*/
             return $http.get('https://rubyonrails-api-jb223cp.c9users.io/api/v1/pubs?akey=newtoken');
         },
 

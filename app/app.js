@@ -10,7 +10,7 @@ var myApp = angular.module('myApp', ['ngRoute']) // you must inject the ngRoute 
         when('/pubs', {
           templateUrl: 'views/pub-list.html',
           controller: 'PubListController',
-          controllerAs: 'pubs' // players could be seen as an instance of the controller, use it in the view!
+          controllerAs: 'pubs' // pubs could be seen as an instance of the controller, use it in the view!
         }).
         when('/pub/:id', {
           templateUrl: 'views/pub-detail.html',
