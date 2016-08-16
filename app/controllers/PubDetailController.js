@@ -11,16 +11,20 @@ angular
 PubDetailController.$inject = ['$routeParams', 'PubService'];
 
 function PubDetailController($routeParams, pubService) {
-    console.log("inside PubDetailController");
-
     // Set the ViewModel
     var vm = this;
 
-    // Calling our service
-    var thePub = pubService.getPub($routeParams.id);
-
-    // Update the ViewModel
-    vm.name = thePub.name;
-    vm.description = thePub.description;
-    vm.rating = thePub.rating;
+    // Calling our service - we get an promise back whitch will be resolved/rejected when the async phase is ready
+    var pubPromise = pubService.getPub($routeParams.id);
+    pubPromise.then(function(data){
+        // everything is good!
+        // Update the ViewModel
+        vm.name = data.name;
+        vm.description = data.description;
+        vm.rating=data.rating;
+    }).catch(function(error){
+        // Something went wrong!
+        vm.message = error;
+        console.log("Error: " +error);
+    })
 }

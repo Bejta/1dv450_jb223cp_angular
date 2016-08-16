@@ -1,6 +1,6 @@
 'use strict';
 
-var myApp = angular.module('myApp', ['ngRoute']) // you must inject the ngRoute (included as a separate js-file)
+var myApp = angular.module('myApp', ['ngRoute','LocalStorageModule']) // you must inject the ngRoute (included as a separate js-file)
     .config(['$routeProvider', '$locationProvider',
       function($routeProvider, $locationProvider) {
         $routeProvider.
@@ -12,7 +12,7 @@ var myApp = angular.module('myApp', ['ngRoute']) // you must inject the ngRoute 
           controller: 'PubListController',
           controllerAs: 'pubs' // pubs could be seen as an instance of the controller, use it in the view!
         }).
-        when('/pub/:id', {
+        when('/pubs/:id', {
           templateUrl: 'views/pub-detail.html',
           controller: 'PubDetailController',
           controllerAs: 'pub'
@@ -24,4 +24,20 @@ var myApp = angular.module('myApp', ['ngRoute']) // you must inject the ngRoute 
           enabled: true,
           requireBase: false
         });
-      }]);
+      }])
+      .config(function (localStorageServiceProvider) {
+        // The module give me some stuff to configure
+        localStorageServiceProvider
+            .setPrefix('myApp')
+            .setStorageType('sessionStorage')
+            .setNotify(true, true)
+      })
+          .constant('API', { // here I also can declare constants
+            'key': "newtoken", // bad practice!? Key on client....
+            'url': "https://rubyonrails-api-jb223cp.c9users.io/api/v1/", // base url
+            'format': 'application/json' // Default representation we want
+          })
+          .constant('LocalStorageConstants', {
+            'pubsKey' : 'p', // just some keys for sessionStorage-keys
+            'tagsKey'   : 't'
+          });
