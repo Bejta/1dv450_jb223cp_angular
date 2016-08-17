@@ -52,16 +52,7 @@ function ResourceService($http, API) {
             });
         };
 
-        // Get a instance resource (take an object,if we have it, as parameter. Otherwise item is an id (Breaking HATEOAS))
-        /*
-         ressourceInfo = {
-         'instanceName' : 'player'
-         'id' : 12
-         'url' : ...
-         }
 
-
-         */
 
         Resource.getSingle = function(resourceInfo) {
 
@@ -69,10 +60,11 @@ function ResourceService($http, API) {
             console.log(resourceInfo);
             // OK this is maybe a clumpsy way to do this and shows a problem with REST and HATEOAS
             // are we using the url provided by the call- The HATEOAS way
-            if(resourceInfo.hasOwnProperty('url')) {
+            /*if(resourceInfo.hasOwnProperty('url')) {
                 url = resourceInfo.url;
-            }
-            else if(resourceInfo.hasOwnProperty('instanceName') && resourceInfo.hasOwnProperty('id')) { // or we using a fall back (item => is an id)
+            }*/
+            //else
+            if(resourceInfo.hasOwnProperty('instanceName') && resourceInfo.hasOwnProperty('id')) { // or we using a fall back (item => is an id)
                 url = API.url +resourceInfo.instanceName +"/" +resourceInfo.id
             }
             else {
